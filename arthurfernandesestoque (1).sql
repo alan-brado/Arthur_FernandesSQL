@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Fev-2025 às 18:09
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.2.0
+-- Tempo de geração: 11-Fev-2025 às 20:59
+-- Versão do servidor: 10.4.28-MariaDB
+-- versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `arthurfernandesestoque`
 --
+DROP DATABASE IF EXISTS `arthurfernandesestoque`;
 CREATE DATABASE IF NOT EXISTS `arthurfernandesestoque` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `arthurfernandesestoque`;
 
@@ -46,19 +47,19 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`COD_cliente`, `nome_cliente`, `endereco`, `cidade`, `CEP`, `CNPJ`, `UF`, `IE`) VALUES
 (20, 'Beth', 'Av Climério n. 45', 'São Paulo', '25679-300', '3248512673268', 'SP', '9280'),
-(110, 'Jorge', 'Rua Caiapó 13', 'Curitiba', '30078500', '1451276498349', 'PR', 'null'),
+(110, 'Jorge', 'Rua Caiapó 13', 'Curitiba', '30078-500', '1451276498349', 'PR', 'null'),
 (130, 'Edmar', 'Rua da Prais s/n', 'Salvador', '30079-300', '234632842349', 'BA', '7121'),
 (157, 'Paulo', 'Tv. Moraes c/3', 'Londrina', 'null', '328482233242', 'PR', '1923'),
-(180, 'Livio', 'Av. Beira Mar n.1256', 'Florianópolis', '30077500', '1273657123474', 'SC', 'null'),
+(180, 'Livio', 'Av. Beira Mar n.1256', 'Florianópolis', '30077-500', '1273657123474', 'SC', 'null'),
 (222, 'Lúcia', 'Rua Itabira 123 loja 09', 'Belo Horizonte', '22124-391', '2831521393488', 'MG', '2985'),
 (234, 'José', 'Quadra 3 bl. 3 sl 1003', 'Brasilia', '22841-650', '2176357612323', 'DF', '2931'),
-(260, 'Susana', 'Rua Lopes Mendes 12', 'Niterói', '30046500', '217635712329', 'RJ', '2530'),
+(260, 'Susana', 'Rua Lopes Mendes 12', 'Niterói', '30046-500', '217635712-329', 'RJ', '2530'),
 (290, 'Renato', 'Rua Meireles n. 123 bl.2 sl.345', 'São Paulo', '30225-900', '1327657112314', 'SP', '1820'),
 (390, 'Sebastião', 'Rua da Igreja n. 10', 'Uberaba', '30438-700', '321765472133', 'MG', '9071'),
 (410, 'Rodolfo', 'Largo da Lapa 27 sobrado', 'Rio de Janeiro', '30078-900', '1283512823469', 'RJ', '7431'),
 (720, 'Ana', 'Rua 17 n.19', 'Niterói', '24358-310', '12113231/0001-34', 'RJ', '2134'),
 (830, 'Mauricio', 'Av Paulista 1236 sl/2345', 'São Paulo', '3012-683', '3281698574656', 'SP', '9343'),
-(870, 'Flavio', 'Av Pres. Vargas 10', 'Sã0 Paulo', '22763-931', '22534126/9387-9', 'SP', '4631');
+(870, 'Flavio', 'Av Pres. Vargas 10', 'São Paulo', '22763-931', '22534126/9387-9', 'SP', '4631');
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,9 @@ INSERT INTO `item_de_pedido` (`NUM_pedido`, `COD_produto`, `QTDE`) VALUES
 (119, 13, 6),
 (119, 22, 10),
 (119, 53, 43),
-(137, 13, 8);
+(137, 13, 8),
+(101, 78, 18),
+(143, 78, 10);
 
 -- --------------------------------------------------------
 
@@ -161,16 +164,16 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`COD_produto`, `unidade_produto`, `desc_produto`, `valor_unit`) VALUES
-(13, 'G', 'Ouro', '6.18'),
-(22, 'M', 'Linho', '0.11'),
-(25, 'Kg', 'Queijo', '0.97'),
-(30, 'SAC', 'Açucar', '0.30'),
-(31, 'Bar', 'Chocolate', '0.87'),
-(45, 'M', 'Madeira', '0.25'),
-(53, 'M', 'Linha', '1.80'),
-(77, 'M', 'Papel', '1.05'),
-(78, 'L', 'Vinho', '2.00'),
-(87, 'M', 'Cano', '1.97');
+(13, 'G', 'Ouro', 6.18),
+(22, 'M', 'Linho', 0.11),
+(25, 'Kg', 'Queijo', 0.97),
+(30, 'SAC', 'Açucar', 0.30),
+(31, 'Bar', 'Chocolate', 0.87),
+(45, 'M', 'Madeira', 0.25),
+(53, 'M', 'Linha', 1.80),
+(77, 'M', 'Papel', 1.05),
+(78, 'L', 'Vinho', 2.00),
+(87, 'M', 'Cano', 1.97);
 
 -- --------------------------------------------------------
 
@@ -190,15 +193,15 @@ CREATE TABLE `vendedor` (
 --
 
 INSERT INTO `vendedor` (`Cod_vendedor`, `Nome_vendedor`, `Sal_fixo`, `FaixaComissao`) VALUES
-(11, 'João', '2780.00', 'C'),
-(101, 'João', '2650.32', 'C'),
-(111, 'Carlos', '2490.00', 'A'),
-(209, 'José', '1800.00', 'C'),
-(213, 'Jonas', '2300.50', 'A'),
-(240, 'Antonio', '9500.00', 'C'),
-(250, 'Mauricío', '2930.00', 'B'),
-(310, 'Josias', '870.00', 'B'),
-(720, 'Felipe', '4600.00', 'A');
+(11, 'João', 2780.00, 'C'),
+(101, 'João', 2650.32, 'C'),
+(111, 'Carlos', 2490.00, 'A'),
+(209, 'José', 1800.00, 'C'),
+(213, 'Jonas', 2300.50, 'A'),
+(240, 'Antonio', 9500.00, 'C'),
+(250, 'Mauricío', 2930.00, 'B'),
+(310, 'Josias', 870.00, 'B'),
+(720, 'Felipe', 4600.00, 'A');
 
 --
 -- Índices para tabelas despejadas
